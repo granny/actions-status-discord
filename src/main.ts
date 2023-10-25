@@ -84,29 +84,9 @@ export function getPayload(inputs: Readonly<Inputs>): Object {
     if (!inputs.nocontext) {
         embed.fields = [
             {
-                name: 'Repository',
-                value: `[${owner}/${repo}](${repoURL})`,
-                inline: true
-            },
-            {
-                name: 'Ref',
-                value: ref,
-                inline: true
-            },
-            {
-                name: eventFieldTitle,
+                name: "Commits",
                 value: eventDetail,
                 inline: false
-            },
-            {
-                name: 'Triggered by',
-                value: actor,
-                inline: true
-            },
-            {
-                name: 'Workflow',
-                value: `[${workflow}](${workflowURL})`,
-                inline: true
             }
         ]
     }

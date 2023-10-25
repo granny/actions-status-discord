@@ -1,4 +1,6 @@
 import { logDebug } from "./utils"
+import {PushEvent} from '@octokit/webhooks-definitions/schema';
+import {MAX_EMBED_FIELD_VALUE_LENGTH} from "./constants";
 
 type Formatter = (payload: any) => string
 
@@ -22,8 +24,13 @@ export function formatEvent(event: string, payload: Object): string {
     return msg
 }
 
-function pushFormatter(payload: any): string {
-    return `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url}) ${payload.head_commit.message}`
+function pushFormatter(payload: PushEvent): string {
+    let output: string = "";
+    for (const commit of payload.commits) {
+        output += `[\`${commit.id.substring(0, 7)}\`](${commit.url}) ${commit.message}`;
+    }
+
+    return output.substring(0, MAX_EMBED_FIELD_VALUE_LENGTH - 3) + "...";;
 }
 
 function pullRequestFormatter(payload: any): string {
