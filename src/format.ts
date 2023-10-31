@@ -30,7 +30,7 @@ function pushFormatter(payload: PushEvent): string {
         output += `[\`${commit.id.substring(0, 7)}\`](${commit.url}) ${commit.message}`;
     }
 
-    return output.substring(0, MAX_EMBED_FIELD_VALUE_LENGTH - 3) + "...";;
+    return output.length > MAX_EMBED_FIELD_VALUE_LENGTH ? output.substring(0, MAX_EMBED_FIELD_VALUE_LENGTH - 3) + "..." : output;
 }
 
 function pullRequestFormatter(payload: any): string {
