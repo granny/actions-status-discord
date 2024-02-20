@@ -27,7 +27,7 @@ export function formatEvent(event: string, payload: Object): string {
 function pushFormatter(payload: PushEvent): string {
     let output: string = "";
     for (const commit of payload.commits) {
-        output += `[\`${commit.id.substring(0, 7)}\`](${commit.url}) ${commit.message}`;
+        output += `[\`${commit.id.substring(0, 7)}\`](${commit.url}) ${commit.message}\n`;
     }
 
     return output.length > MAX_EMBED_FIELD_VALUE_LENGTH ? output.substring(0, MAX_EMBED_FIELD_VALUE_LENGTH - 3) + "..." : output;
